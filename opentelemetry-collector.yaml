@@ -1,0 +1,44 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: <name-collector> # name is prefix ex.name = optel; svc -> optel-collector
+  namespace: <ns-app>
+spec:
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+            max_recv_msg_size_mib: 16
+          http:
+            endpoint: "0.0.0.0:4318"
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+    exporters:
+      debug:
+        verbosity: detailed
+      otlp:
+        endpoint: "<endpoint-traces-dataSource-svc-port-4317>"
+        tls:
+          insecure: true
+      otlphttp:
+        endpoint: "http://<endpoint-traces-dataSource-svc-port-4318>"
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter]
+          exporters: [debug,otlp,otlphttp]
+        # metrics:
+        #   receivers: [otlp]
+        #   processors: [memory_limiter]
+        #   exporters: [debug]
+        # logs:
+        #   receivers: [otlp]
+        #   processors: [memory_limiter]
+        #   exporters: [debug]
