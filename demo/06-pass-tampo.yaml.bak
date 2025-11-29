@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: otelgen-loop
+  namespace: observability
+spec:
+  restartPolicy: Never
+  containers:
+  - name: otelgen
+    image: ghcr.io/krzko/otelgen:latest
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        while true; do
+          otelgen --protocol http --otel-exporter-otlp-endpoint tempo.observability.svc:4318  --insecure traces multi
+          sleep 1
+        done
