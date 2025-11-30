@@ -227,3 +227,32 @@ If you'd like, I can:
 
 ⚠️ Note: This demo uses unsecured HTTP for OTLP to Tempo and has `tls: insecure` in the collector. Use TLS and authentication for production.
 
+---
+
+## ⚠️ Container Images ⚠️
+
+Here are the container images used in this demo:
+
+- **grafana/tempo:2.6.0**  
+	- Grafana Tempo distributed tracing backend. Stores and queries traces (backend for Jaeger/OTLP data). Version 2.6.0.
+
+- **otel/opentelemetry-collector-contrib:0.102.0**  
+	- OpenTelemetry Collector (contrib build) — community receivers, exporters, processors and extensions bundled for collecting and exporting telemetry. Version 0.102.0.
+
+- **ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.140.0**  
+	- Official OpenTelemetry Collector core release (minimal, upstream-built collector binary) for receiving, processing and exporting telemetry. Version 0.140.0.
+
+- **ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:1.33.6**  
+	- Java auto-instrumentation agent image provided by OpenTelemetry tooling/operator to automatically instrument Java applications for tracing/metrics. Version 1.33.6.
+
+- **ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator:0.140.0**  
+	- Kubernetes operator to deploy and manage OpenTelemetry components (Collectors, auto-instrumentation, CRDs). Version 0.140.0.
+
+- **quay.io/jetstack/cert-manager-webhook:v1.19.1**  
+	- cert-manager webhook component that serves admission webhooks used by cert-manager CRDs. Version v1.19.1.
+
+- **quay.io/jetstack/cert-manager-cainjector:v1.19.1**  
+	- cert-manager CA injector that injects CA bundles into webhook/validating webhook configurations and secrets. Version v1.19.1.
+
+- **quay.io/jetstack/cert-manager-controller:v1.19.1**  
+	- cert-manager controller that reconciles Certificate, Issuer and related CRDs to provision TLS certificates. Version v1.19.1.
