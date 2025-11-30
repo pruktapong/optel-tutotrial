@@ -1,0 +1,1 @@
+```It's basic configuration info for Tempo.```
