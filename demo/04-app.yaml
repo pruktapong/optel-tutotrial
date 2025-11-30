@@ -14,6 +14,7 @@ spec:
         app: my-java
       annotations:
         instrumentation.opentelemetry.io/inject-java: "true"
+        # sidecar.opentelemetry.io/inject: "true" #use ony sidecar injection
     spec:
       securityContext:
         runAsUser: 1000
