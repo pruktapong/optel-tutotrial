@@ -39,7 +39,7 @@ data:
           source: tempo
       storage:
         path: /var/tempo/generator/wal
-      # ย้าย Ring มาไว้ตรงนี้
+
       ring:
         kvstore:
           store: inmemory
